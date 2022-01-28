@@ -4,9 +4,7 @@
 
 Week2_Assignment
 
-## Instructions
 
-Run the application :
 
 
 

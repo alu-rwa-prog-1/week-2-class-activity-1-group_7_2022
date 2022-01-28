@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: <Widget>[
                             Center(
                               child:
-                              ImageIcon(AssetImage('assets/facebook.png')),
+                                  ImageIcon(AssetImage('assets/facebook.png')),
                             ),
                             SizedBox(width: 10.0),
                             Center(

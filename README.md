@@ -3,8 +3,3 @@
 - Caleb Mugisha
 
 Week2_Assignment
-
-
-
-
-

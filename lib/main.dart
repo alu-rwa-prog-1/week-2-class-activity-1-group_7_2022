@@ -1,148 +1,181 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart'
-import 'package:flutter_login_ui/common/theme_helper.dart';
 
-void main() {
-  runApp( LoginUIApp());
-}
+import 'signup.dart';
 
+void main() => runApp(new MyApp());
 
-class LoginUIApp extends StatelessWidget {
-
-
-  Color primaryColor = HexColor('#DC54FE');
-  Color accentColor = HexColor('#8A02AE');
-
-
-  // This widget is the root of your application.
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Login UI',
-      theme: ThemeData(
-
-        primaryColor: primaryColor,
-        accentColor: accentColor,
-        scaffoldBackgroundColor: Colors.grey.shade100,
-        primarySwatch: Colors.grey,
-      ),
-      home: const LoginPage(title: 'Flutter Demo Home Page'),
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+        '/signup': (BuildContext context) => new SignupPage()
+      },
+      home: new MyHomePage(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget{
-  const LoginPage({Key? key}): super(key:key);
-
+class MyHomePage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _LoginPageState extends State<LoginPage>{
-  double _headerHeight = 250;
-  Key _formKey = GlobalKey<FormState>();
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+    return new Scaffold(
+        resizeToAvoidBottomPadding: false,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
             Container(
-              height: _headerHeight,
-              child: HeaderWidget(_headerHeight, true, Icons.login_rounded), //let's create a common header widget
-            ),
-            SafeArea(
-              child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  margin: EdgeInsets.fromLTRB(20, 10, 20, 10),// This will be the login form
-                  child: Column(
-                    children: [
-                      Text(
-                        'Hello',
-                        style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Signin into your account',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      SizedBox(height: 30.0),
-                      Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              Container(
-                                child: TextField(
-                                  decoration: ThemeHelper().textInputDecoration('User Name', 'Enter your user name'),
-                                ),
-                                decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                              ),
-                              SizedBox(height: 30.0),
-                              Container(
-                                child: TextField(
-                                  obscureText: true,
-                                  decoration: ThemeHelper().textInputDecoration('Password', 'Enter your password'),
-                                ),
-                                decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                              ),
-                              SizedBox(height: 15.0),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(10,0,10,20),
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-
-                                  child: Text( "Forgot your password?", style: TextStyle( color: Colors.grey, ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: ThemeHelper().buttonBoxDecoration(context),
-                                child: ElevatedButton(
-                                  style: ThemeHelper().buttonStyle(),
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                                    child: Text('Sign In'.toUpperCase(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
-                                  ),
-                                  onPressed: (){
-                                    //After successful login we will redirect to profile page. Let's create profile page now
-                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilePage()));
-                                  },
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(10,20,10,20),
-                                //child: Text('Don\'t have an account? Create'),
-                                child: Text.rich(
-                                    TextSpan(
-                                        children: [
-                                          TextSpan(text: "Don\'t have an account? "),
-                                          TextSpan(
-                                            text: 'Create',
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = (){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()));
-                                              },
-                                            style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                              ),
-                            ],
-                          )
-                      ),
-                    ],
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                    child: Text('Hello',
+                        style: TextStyle(
+                            fontSize: 80.0, fontWeight: FontWeight.bold)),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
+                    child: Text('There',
+                        style: TextStyle(
+                            fontSize: 80.0, fontWeight: FontWeight.bold)),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(220.0, 175.0, 0.0, 0.0),
+                    child: Text('.',
+                        style: TextStyle(
+                            fontSize: 80.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green)),
                   )
+                ],
               ),
             ),
+            Container(
+                padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: 'EMAIL',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.green))),
+                    ),
+                    SizedBox(height: 20.0),
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: 'PASSWORD',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.green))),
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 5.0),
+                    Container(
+                      alignment: Alignment(1.0, 0.0),
+                      padding: EdgeInsets.only(top: 15.0, left: 20.0),
+                      child: InkWell(
+                        child: Text(
+                          'Forgot Password',
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 40.0),
+                    Container(
+                      height: 40.0,
+                      child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.greenAccent,
+                        color: Colors.green,
+                        elevation: 7.0,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Center(
+                            child: Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Container(
+                      height: 40.0,
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.black,
+                                style: BorderStyle.solid,
+                                width: 1.0),
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Center(
+                              child:
+                              ImageIcon(AssetImage('assets/facebook.png')),
+                            ),
+                            SizedBox(width: 10.0),
+                            Center(
+                              child: Text('Log in with facebook',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat')),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                )),
+            SizedBox(height: 15.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'New to Spotify ?',
+                  style: TextStyle(fontFamily: 'Montserrat'),
+                ),
+                SizedBox(width: 5.0),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/signup');
+                  },
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline),
+                  ),
+                )
+              ],
+            )
           ],
-        ),
-      ),
-    );
-
+        ));
   }
 }
